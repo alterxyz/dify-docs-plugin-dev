@@ -1,51 +1,66 @@
 import os
 import yaml
 import re
-# import shutil  # Keep for potential future use, though os.rename is used now
-import datetime  # To generate timestamps for archiving
+import datetime
+
+# --- Path Setup ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # --- Configuration ---
-SOURCE_DIR_NAME = "docs_new_archive_20250409_152626" # dev_plugin
-TARGET_DIR_NAME = "docs"
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+docs_path = os.path.join(BASE_DIR, "docs")
+if os.path.exists(docs_path):
+    docs_timestamp = f"docs_{timestamp}"
+    os.rename(docs_path, os.path.join(BASE_DIR, docs_timestamp))
+    SOURCE_DIR_NAME = docs_timestamp
+    TARGET_DIR_NAME = "docs"
+else:
+    print(f"Warning: 'docs' directory not found in {BASE_DIR}")
+    print("Creating a new 'docs' directory...")
+    SOURCE_DIR_NAME = "docs_empty_source"
+    TARGET_DIR_NAME = "docs"
+    os.makedirs(
+        os.path.join(BASE_DIR, SOURCE_DIR_NAME), exist_ok=True
+    )
+
 ARCHIVE_PREFIX = "docs_new_archive_"  # Prefix for archived directories
 
 # --- Mapping Configuration ---
 # (Mappings remain the same as the previous version)
 PRIMARY_TYPE_MAP = {
-    'conceptual': 1, 'implementation': 2, 'operational': 3, 'reference': 4,
+    "conceptual": 1,
+    "implementation": 2,
+    "operational": 3,
+    "reference": 4,
 }
 DEFAULT_W = 0
 DETAIL_TYPE_MAPS = {
-    'conceptual': {'introduction': 1, 'principles': 2, 'architecture': 3},
-    'implementation': {'basic': 1, 'standard': 2, 'high': 3, 'advanced': 4},
-    'operational': {'setup': 1, 'deployment': 2, 'maintenance': 3},
-    'reference': {'core': 1, 'configuration': 2, 'examples': 3},
+    "conceptual": {"introduction": 1, "principles": 2, "architecture": 3},
+    "implementation": {"basic": 1, "standard": 2, "high": 3, "advanced": 4},
+    "operational": {"setup": 1, "deployment": 2, "maintenance": 3},
+    "reference": {"core": 1, "configuration": 2, "examples": 3},
 }
 DEFAULT_X = 0
 LEVEL_MAP = {
-    'beginner': 1, 'intermediate': 2, 'advanced': 3,
+    "beginner": 1,
+    "intermediate": 2,
+    "advanced": 3,
 }
 DEFAULT_Y = 0
 PRIORITY_NORMAL = 0
 PRIORITY_HIGH = 9
-PRIORITY_ADVANCED_LEVEL_KEY = 'advanced'
-PRIORITY_IMPLEMENTATION_PRIMARY_KEY = 'implementation'
-PRIORITY_IMPLEMENTATION_DETAIL_KEYS = {'high', 'advanced'}
+PRIORITY_ADVANCED_LEVEL_KEY = "advanced"
+PRIORITY_IMPLEMENTATION_PRIMARY_KEY = "implementation"
+PRIORITY_IMPLEMENTATION_DETAIL_KEYS = {"high", "advanced"}
 
 # --- Configuration End ---
-
-# --- Path Setup ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SOURCE_DIR = os.path.join(BASE_DIR, SOURCE_DIR_NAME)
-TARGET_DIR = os.path.join(BASE_DIR, TARGET_DIR_NAME)
 
 # --- Helper Functions ---
 # (extract_front_matter remains the same)
 
 
 def extract_front_matter(content):
-    match = re.match(r'^\s*---\s*$(.*?)^---\s*$(.*)',
-                     content, re.DOTALL | re.MULTILINE)
+    match = re.match(r"^\s*---\s*$(.*?)^---\s*$(.*)", content, re.DOTALL | re.MULTILINE)
     if match:
         yaml_str = match.group(1).strip()
         markdown_content = match.group(2).strip()
@@ -53,12 +68,15 @@ def extract_front_matter(content):
             front_matter = yaml.safe_load(yaml_str)
             if front_matter is None:
                 return {}, markdown_content
-            return front_matter if isinstance(front_matter, dict) else {}, markdown_content
+            return (
+                front_matter if isinstance(front_matter, dict) else {}
+            ), markdown_content
         except yaml.YAMLError as e:
             print(f"  [Error] YAML Parsing Failed: {e}")
             return None, content
     else:
         return {}, content
+
 
 # (sanitize_filename_part remains mostly the same, ensures non-empty return)
 
@@ -68,13 +86,14 @@ def sanitize_filename_part(part):
         part = str(part)
     part = part.lower()
     # Replace common problematic characters first
-    part = part.replace('&', 'and').replace('@', 'at')
-    part = re.sub(r'\s+', '-', part)  # Whitespace to hyphen
+    part = part.replace("&", "and").replace("@", "at")
+    part = re.sub(r"\s+", "-", part)  # Whitespace to hyphen
     # Keep letters, numbers, underscore, hyphen. Remove others.
-    part = re.sub(r'[^\w\-]+', '', part)
-    part = part.strip('.-_')  # Remove leading/trailing separators
+    part = re.sub(r"[^\w\-]+", "", part)
+    part = part.strip(".-_")  # Remove leading/trailing separators
     # Ensure it's not empty, provide a default if it becomes empty
     return part or "untitled"
+
 
 # --- Main Processing Function ---
 
@@ -91,19 +110,18 @@ def process_markdown_files(source_dir, target_dir):
     if os.path.exists(target_dir):
         if os.path.isdir(target_dir):
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            archive_dir = os.path.join(
-                BASE_DIR, f"{ARCHIVE_PREFIX}{timestamp}")
+            archive_dir = os.path.join(BASE_DIR, f"{ARCHIVE_PREFIX}{timestamp}")
             try:
                 os.rename(target_dir, archive_dir)
                 print(f"Archived existing target directory to: {archive_dir}")
             except OSError as e:
-                print(
-                    f"[Error] Failed to archive existing target directory: {e}")
+                print(f"[Error] Failed to archive existing target directory: {e}")
                 print("Aborting to prevent data loss.")
                 return  # Stop execution if archiving fails
         else:
             print(
-                f"[Error] Target path '{target_dir}' exists but is not a directory. Please remove or rename it manually.")
+                f"[Error] Target path '{target_dir}' exists but is not a directory. Please remove or rename it manually."
+            )
             print("Aborting.")
             return
 
@@ -122,44 +140,56 @@ def process_markdown_files(source_dir, target_dir):
     error_count = 0
     warning_count = 0  # Counts files with at least one warning
 
+    total_files = sum(
+        1
+        for root, _, files in os.walk(source_dir)
+        for file in files
+        if file.lower().endswith(".md")
+    )
+    print(f"Found {total_files} Markdown files to process")
+
     for root, _, files in os.walk(source_dir):
         for filename in files:
             if not filename.lower().endswith(".md"):
                 continue
 
             original_filepath = os.path.join(root, filename)
-            relative_path = os.path.relpath(
-                original_filepath, BASE_DIR).replace(os.sep, '/')
+            relative_path = os.path.relpath(original_filepath, BASE_DIR).replace(
+                os.sep, "/"
+            )
 
-            print(f"\nProcessing: {relative_path}")
-            current_warnings = 0  # Reset warning flag for this file
+            current_warnings = 0
 
             try:
-                with open(original_filepath, 'r', encoding='utf-8') as f:
+                with open(original_filepath, "r", encoding="utf-8") as f:
                     content = f.read()
 
                 front_matter, markdown_content = extract_front_matter(content)
 
                 if front_matter is None:
+                    print(f"\nProcessing: {relative_path}")
                     print("  [Skipping] YAML Error in file.")
                     error_count += 1
                     continue
 
                 # --- Extract Metadata (including new fields) ---
-                dimensions = front_matter.get('dimensions', {})
-                type_info = dimensions.get('type', {})
-                primary = type_info.get('primary')
-                detail = type_info.get('detail')
-                level = dimensions.get('level')
-                standard_title = front_matter.get('standard_title')  # New
-                language = front_matter.get('language')  # New
+                dimensions = front_matter.get("dimensions", {})
+                type_info = dimensions.get("type", {})
+                primary = type_info.get("primary")
+                detail = type_info.get("detail")
+                level = dimensions.get("level")
+                standard_title = front_matter.get("standard_title")  # New
+                language = front_matter.get("language")  # New
 
                 # --- Determine P, W, X, Y (Logic remains the same) ---
                 P = PRIORITY_NORMAL
                 # (Priority logic based on level and implementation/detail)
                 if level == PRIORITY_ADVANCED_LEVEL_KEY:
                     P = PRIORITY_HIGH
-                if primary == PRIORITY_IMPLEMENTATION_PRIMARY_KEY and detail in PRIORITY_IMPLEMENTATION_DETAIL_KEYS:
+                if (
+                    primary == PRIORITY_IMPLEMENTATION_PRIMARY_KEY
+                    and detail in PRIORITY_IMPLEMENTATION_DETAIL_KEYS
+                ):
                     P = PRIORITY_HIGH
 
                 W = PRIMARY_TYPE_MAP.get(primary, DEFAULT_W)
@@ -168,31 +198,40 @@ def process_markdown_files(source_dir, target_dir):
                 Y = LEVEL_MAP.get(level, DEFAULT_Y)
 
                 # --- Warnings for missing dimension data (same as before) ---
+                warnings_messages = []
                 if primary is None:
                     current_warnings += 1
-                    print("  [Warning] Missing dimensions.type.primary")
+                    warnings_messages.append(
+                        "  [Warning] Missing dimensions.type.primary"
+                    )
                 elif W == DEFAULT_W:
                     current_warnings += 1
-                    print(
-                        f"  [Warning] Unmapped primary type: '{primary}'. Using W={DEFAULT_W}")
+                    warnings_messages.append(
+                        f"  [Warning] Unmapped primary type: '{primary}'. Using W={DEFAULT_W}"
+                    )
                 if detail is None:
                     current_warnings += 1
-                    print("  [Warning] Missing dimensions.type.detail")
+                    warnings_messages.append(
+                        "  [Warning] Missing dimensions.type.detail"
+                    )
                 elif X == DEFAULT_X and primary in DETAIL_TYPE_MAPS:
                     current_warnings += 1
-                    print(
-                        f"  [Warning] Unmapped detail type: '{detail}' for primary '{primary}'. Using X={DEFAULT_X}")
+                    warnings_messages.append(
+                        f"  [Warning] Unmapped detail type: '{detail}' for primary '{primary}'. Using X={DEFAULT_X}"
+                    )
                 elif primary not in DETAIL_TYPE_MAPS and primary is not None:
                     current_warnings += 1
-                    print(
-                        f"  [Warning] No detail map defined for primary type: '{primary}'. Using X={DEFAULT_X}")
+                    warnings_messages.append(
+                        f"  [Warning] No detail map defined for primary type: '{primary}'. Using X={DEFAULT_X}"
+                    )
                 if level is None:
                     current_warnings += 1
-                    print("  [Warning] Missing dimensions.level")
+                    warnings_messages.append("  [Warning] Missing dimensions.level")
                 elif Y == DEFAULT_Y:
                     current_warnings += 1
-                    print(
-                        f"  [Warning] Unmapped level: '{level}'. Using Y={DEFAULT_Y}")
+                    warnings_messages.append(
+                        f"  [Warning] Unmapped level: '{level}'. Using Y={DEFAULT_Y}"
+                    )
 
                 # --- Construct New Filename using standard_title and language ---
                 prefix_str = f"{P}{W}{X}{Y}"
@@ -200,24 +239,23 @@ def process_markdown_files(source_dir, target_dir):
                     numeric_prefix = int(prefix_str)
                     padded_prefix = f"{numeric_prefix:04d}"
                 except ValueError:
+                    print(f"\nProcessing: {relative_path}")
                     print(
-                        f"  [Error] Could not form numeric prefix from P={P}, W={W}, X={X}, Y={Y}. Using '0000'.")
-                    padded_prefix = "0000"
+                        f"  [Error] Could not form numeric prefix from P={P}, W={W}, X={X}, Y={Y}. Using '0000'."
+                    )
                     error_count += 1
                     continue  # Skip file
 
                 # Determine title part (use standard_title or fallback)
                 title_part_to_use = standard_title
                 if not title_part_to_use:
-                    print(
-                        "  [Warning] Missing 'standard_title'. Using original filename base as fallback.")
                     current_warnings += 1
-                    title_part_to_use = os.path.splitext(filename)[
-                        0]  # Fallback
+                    warnings_messages.append(
+                        "  [Warning] Missing 'standard_title'. Using original filename base as fallback."
+                    )
+                    title_part_to_use = os.path.splitext(filename)[0]  # Fallback
 
                 sanitized_title = sanitize_filename_part(title_part_to_use)
-                print(
-                    f"  Using Title: '{title_part_to_use}' -> Sanitized: '{sanitized_title}'")
 
                 # Determine language suffix
                 lang_suffix = ""
@@ -225,64 +263,80 @@ def process_markdown_files(source_dir, target_dir):
                     lang_code = str(language).strip().lower()
                     if lang_code:
                         lang_suffix = f".{lang_code}"
-                        print(
-                            f"  Using Language: '{language}' -> Suffix: '{lang_suffix}'")
                     else:
-                        print(
-                            "  [Warning] Empty 'language' field found. Omitting suffix.")
                         current_warnings += 1
+                        warnings_messages.append(
+                            "  [Warning] Empty 'language' field found. Omitting suffix."
+                        )
                 else:
-                    print(
-                        "  [Warning] Missing 'language' field. Omitting suffix.")
                     current_warnings += 1
+                    warnings_messages.append(
+                        "  [Warning] Missing 'language' field. Omitting suffix."
+                    )
 
                 # Combine parts
                 new_filename = f"{padded_prefix}-[{sanitized_title}]{lang_suffix}.md"
-                print(
-                    f"  Calculated PWXY: {padded_prefix} (P={P}, W={W}, X={X}, Y={Y})")
-                print(f"  Generated Filename: {new_filename}")
-
                 target_filepath = os.path.join(target_dir, new_filename)
 
                 # --- Check for Collisions ---
                 if os.path.exists(target_filepath):
-                    print(
-                        f"  [Skipping] Target file already exists: {new_filename}")
+                    print(f"\nProcessing: {relative_path}")
+                    print(f"  [Skipping] Target file already exists: {new_filename}")
                     skipped_count += 1
                     continue
 
                 # --- Prepare New Content ---
                 try:
                     new_yaml_str = yaml.dump(
-                        front_matter, allow_unicode=True, default_flow_style=False, sort_keys=False)
+                        front_matter,
+                        allow_unicode=True,
+                        default_flow_style=False,
+                        sort_keys=False,
+                    )
                 except Exception as dump_error:
-                    print(
-                        f"  [Error] Failed to dump updated YAML: {dump_error}")
+                    print(f"\nProcessing: {relative_path}")
+                    print(f"  [Error] Failed to dump updated YAML: {dump_error}")
                     error_count += 1
                     continue
 
                 new_content = f"---\n{new_yaml_str}---\n\n{markdown_content}"
 
                 # --- Write New File ---
-                with open(target_filepath, 'w', encoding='utf-8') as f:
+                with open(target_filepath, "w", encoding="utf-8") as f:
                     f.write(new_content)
 
-                print("  [Success] File processed and saved.")
-                processed_count += 1
                 if current_warnings > 0:
-                    warning_count += 1  # Increment file warning count if this file had warnings
+                    print(f"\nProcessing: {relative_path}")
+                    for warning in warnings_messages:
+                        print(warning)
+                    warning_count += (
+                        1  # Increment file warning count if this file had warnings
+                    )
+
+                processed_count += 1
+                if processed_count % 10 == 0 or processed_count == total_files:
+                    print(
+                        f"Progress: {processed_count}/{total_files} files processed",
+                        end="\r",
+                    )
 
             except FileNotFoundError:
+                print(f"\nProcessing: {relative_path}")
                 print(
-                    f"  [Error] File not found during processing: {original_filepath}")
+                    f"  [Error] File not found during processing: {original_filepath}"
+                )
                 error_count += 1
             except Exception as e:
+                print(f"\nProcessing: {relative_path}")
                 print(
-                    f"  [Error] Unexpected error processing file '{relative_path}': {e}")
+                    f"  [Error] Unexpected error processing file '{relative_path}': {e}"
+                )
                 import traceback
+
                 traceback.print_exc()
                 error_count += 1
 
+    print("\n")  # Add a newline after progress counter
     # --- Final Report ---
     print("\n--- Processing Complete ---")
     print(f"Successfully processed: {processed_count} files")
@@ -292,10 +346,14 @@ def process_markdown_files(source_dir, target_dir):
     print("-" * 27)
 
 
-# --- Script Entry Point ---
 if __name__ == "__main__":
-    if not os.path.isdir(SOURCE_DIR):
-        print(
-            f"Error: Source directory '{SOURCE_DIR_NAME}' not found in '{BASE_DIR}'.")
-    else:
-        process_markdown_files(SOURCE_DIR, TARGET_DIR)
+    SOURCE_PATH = os.path.join(BASE_DIR, SOURCE_DIR_NAME)
+    TARGET_PATH = os.path.join(BASE_DIR, TARGET_DIR_NAME)
+    process_markdown_files(SOURCE_PATH, TARGET_PATH)
+
+    if SOURCE_DIR_NAME == "docs_empty_source" and os.path.exists(SOURCE_PATH):
+        try:
+            os.rmdir(SOURCE_PATH)
+            print(f"Removed temporary source directory: {SOURCE_PATH}")
+        except OSError as e:
+            print(f"Note: Could not remove temporary directory: {e}")
