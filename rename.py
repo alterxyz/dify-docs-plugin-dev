@@ -24,6 +24,7 @@ else:
     )
 
 ARCHIVE_PREFIX = "docs_new_archive_"  # Prefix for archived directories
+NO_NUMBER_DIR_NAME = "docs_original_no_direct_edit"  # 新增：无编号文件夹名称
 
 # --- Mapping Configuration ---
 # (Mappings remain the same as the previous version)
@@ -101,10 +102,15 @@ def sanitize_filename_part(part):
 def process_markdown_files(source_dir, target_dir):
     """
     Processes markdown files, archives old target dir, uses PWXY-[title].lang.md format.
+    Also creates a copy without numbering in docs_original_no_direct_edit folder.
     """
     print("Starting processing...")
     print(f"Source Directory: {source_dir}")
     print(f"Target Directory: {target_dir}")
+    
+    # 新增：无编号文件夹路径
+    no_number_dir = os.path.join(BASE_DIR, NO_NUMBER_DIR_NAME)
+    print(f"No Number Directory: {no_number_dir}")
 
     # --- Archive Existing Target Directory ---
     if os.path.exists(target_dir):
@@ -134,11 +140,29 @@ def process_markdown_files(source_dir, target_dir):
         print(f"[Error] Failed to create target directory '{target_dir}': {e}")
         print("Aborting.")
         return
+    
+    # --- 创建无编号文件目录 ---
+    try:
+        # 如果已存在则先删除
+        if os.path.exists(no_number_dir):
+            if os.path.isdir(no_number_dir):
+                import shutil
+                shutil.rmtree(no_number_dir)
+            else:
+                os.remove(no_number_dir)
+        
+        # 创建新目录
+        os.makedirs(no_number_dir, exist_ok=False)
+        print(f"Created no-number directory: {no_number_dir}")
+    except OSError as e:
+        print(f"[Error] Failed to create no-number directory '{no_number_dir}': {e}")
+        print("Will skip saving no-number versions.")
 
     processed_count = 0
     skipped_count = 0
     error_count = 0
     warning_count = 0  # Counts files with at least one warning
+    no_number_count = 0  # 新增：记录无编号文件数量
 
     total_files = sum(
         1
@@ -304,6 +328,25 @@ def process_markdown_files(source_dir, target_dir):
                 # --- Write New File ---
                 with open(target_filepath, "w", encoding="utf-8") as f:
                     f.write(new_content)
+                
+                # --- 写入无编号版本 ---
+                try:
+                    if os.path.exists(no_number_dir):
+                        # 去掉编号前缀，只保留标题部分
+                        no_number_filename = f"{sanitized_title}{lang_suffix}.md"
+                        no_number_filepath = os.path.join(no_number_dir, no_number_filename)
+                        
+                        # 检查文件是否已存在 - 简化重名处理
+                        if os.path.exists(no_number_filepath):
+                            # 简单处理，只添加-dup标记
+                            no_number_filename = f"{sanitized_title}-dup{lang_suffix}.md"
+                            no_number_filepath = os.path.join(no_number_dir, no_number_filename)
+                                
+                        with open(no_number_filepath, "w", encoding="utf-8") as f:
+                            f.write(new_content)
+                        no_number_count += 1
+                except Exception as e:
+                    print(f"  [Warning] Failed to save no-number version: {e}")
 
                 if current_warnings > 0:
                     print(f"\nProcessing: {relative_path}")
@@ -343,12 +386,14 @@ def process_markdown_files(source_dir, target_dir):
     print(f"Skipped (target exists): {skipped_count} files")
     print(f"Files with warnings (missing/unmapped data): {warning_count}")
     print(f"Errors encountered: {error_count} files")
+    print(f"No-number versions created: {no_number_count} files")
     print("-" * 27)
 
 
 if __name__ == "__main__":
     SOURCE_PATH = os.path.join(BASE_DIR, SOURCE_DIR_NAME)
     TARGET_PATH = os.path.join(BASE_DIR, TARGET_DIR_NAME)
+    NO_NUMBER_PATH = os.path.join(BASE_DIR, NO_NUMBER_DIR_NAME)  # 新增：无编号路径
     process_markdown_files(SOURCE_PATH, TARGET_PATH)
 
     if SOURCE_DIR_NAME == "docs_empty_source" and os.path.exists(SOURCE_PATH):
