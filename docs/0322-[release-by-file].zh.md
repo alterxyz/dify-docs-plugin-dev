@@ -4,7 +4,7 @@ dimensions:
     primary: operational
     detail: deployment
   level: intermediate
-standard_title: Package Plugin File And Publish
+standard_title: Release by File
 language: zh
 ---
 

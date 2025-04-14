@@ -4,7 +4,7 @@ dimensions:
     primary: operational
     detail: setup
   level: intermediate
-standard_title: Plugin Privacy Protection Guidelines
+standard_title: Privacy Protection Guidelines
 language: zh
 ---
 

@@ -4,13 +4,8 @@ dimensions:
     primary: reference
     detail: core
   level: beginner
-target_dimensions:
-  type:
-    primary: conceptual
-    detail: architecture
-  level: beginner
 description: 'Author: Yeuoly，Allen'
-standard_title: Manifest
+standard_title: Plugin info by Manifest
 language: zh
 ---
 

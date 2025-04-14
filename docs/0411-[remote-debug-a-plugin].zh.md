@@ -1,10 +1,10 @@
 ---
 dimensions:
   type:
-    primary: operational
-    detail: setup
+    primary: reference
+    detail: core
   level: beginner
-standard_title: Debug Plugin
+standard_title: Remote Debug a Plugin
 language: zh
 ---
 

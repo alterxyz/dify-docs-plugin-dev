@@ -4,7 +4,7 @@ dimensions:
     primary: operational
     detail: deployment
   level: intermediate
-standard_title: Publish Plugin On Personal Github Repo
+standard_title: Release to Individual GitHub Repo
 language: zh
 ---
 

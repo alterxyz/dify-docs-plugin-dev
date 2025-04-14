@@ -1,10 +1,10 @@
 ---
 dimensions:
   type:
-    primary: implementation
-    detail: standard
+    primary: reference
+    detail: core
   level: beginner
-standard_title: Persistent Storage
+standard_title: Persistent Storage KV
 language: zh
 ---
 

@@ -2,9 +2,9 @@
 dimensions:
   type:
     primary: operational
-    detail: setup
-  level: beginner
-standard_title: Readme
+    detail: deployment
+  level: intermediate
+standard_title: Release to Dify Marketplace
 language: zh
 ---
 

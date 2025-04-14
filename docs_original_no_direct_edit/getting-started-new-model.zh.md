@@ -6,52 +6,104 @@ dimensions:
   level: beginner
 standard_title: Getting Started New Model
 language: zh
-todo: refine from this draft
 ---
 
 # 快速接入一个新模型
 
-你可能仅是想快速接入一个新型号的模型，那么本文将以简明的方式带你接入一个新的模型。你无需专业的编程背景，只需按照以下步骤操作即可。
-如果新模型涉及了一些新功能，例如 Sonnet 3.7 支持了 thinking 参数，那么本文或许不适合。
+欢迎来到 Dify 的插件开发世界！Dify 的强大功能离不开社区贡献者的共同努力。我们相信，即使你不是专业的程序员，只要你对 AI 技术充满热情并愿意查阅资料，也能为 Dify 贡献自己的一份力量，例如帮助 Dify 支持更多、更新的 AI 模型。
 
-## 初始化开发工具
+本文将以最简明的方式，带你完成最常见也最简单的贡献：为一个 Dify **已经支持**的模型供应商，添加一个**新型号**的模型。这种方式通常**只需要修改配置文件**，无需编写代码，非常适合作为你的第一个贡献！
 
-首先，初始化 Dify 插件开发工具包。我们将其配置为 `dify`
+**这种快速接入方式适用于：**
 
-然后，fork 我们的官方插件仓库，并在本地打开。
+- 新模型属于 Dify 已有插件支持的供应商（如 OpenAI, Google Gemini, Anthropic Claude 等）。
+- 新模型与同系列其他模型使用相同的 API 认证和基础调用逻辑。
+- 主要区别在于模型 ID、上下文长度、最大 Token 数、定价等配置参数。
 
-打开你需要添加的模型文件夹，例如 `models/vertex_ai/models/llm/gemini-2.0-pro-exp-02-05.yaml`
+_(如果你需要添加的模型需要新的 API 逻辑或支持特殊功能，那将涉及到 Python 代码编写，请参考 [其他开发者文档链接 - placeholder] 获取更详细的指南。)_
 
-我们复制这个文件，并将其重命名为 2.5 ：
-`models/vertex_ai/models/llm/gemini-2.5-pro-exp-03-25.yaml`
+**准备工作:**
 
-然后去 Google 的相关官网确定参数，并进行相应的修改：
+- 熟悉基本的 Git 操作 (Fork, Clone, Pull Request)。
+- 一个 GitHub 账号。
+- 安装并配置好 Dify 插件开发工具包 (参考 [初始化开发工具](../initialize-development-tools.md))。
 
-| 参数 | Gemini 2.0 | Gemini 2.5 |
-| --- | --- | --- |
-| model | `gemini-2.0-pro-exp-02-05` | `gemini-2.5-pro-exp-03-25` |
-| label: en_US | Gemini 2.0 pro exp 02-05 | Gemini 2.5 pro exp 03-25 |
-| context_size | 1048576 | 2097152 |
-| max_output_tokens | 8192 | 65535 |
+**操作步骤:**
 
-以及，我们修改下版本号：
+1. **Fork & Clone 官方插件仓库:**
 
-models/vertex_ai/manifest.yaml
+    - 访问 Dify 官方插件仓库 `https://github.com/langgenius/dify-official-plugins`。
+    - 点击 "Fork" 按钮，将仓库复刻到你自己的 GitHub 账号下。
+    - 使用 Git 将你 Fork 的仓库 Clone 到你的本地电脑。
 
-`version: 0.0.8` -> `version: 0.0.9`
+2. **找到并复制模型配置文件:**
 
-## 尝试运行
+    - 在本地仓库中，导航到 `models/` 目录下，找到你想要添加模型的供应商文件夹，例如 `vertex_ai`。
+    - 进入该供应商对应的模型类型子目录，通常是 `models/llm/` (如果是文本生成模型)。
+    - 在该目录下，找到一个与你要添加的新型号最相似的现有模型的 YAML 配置文件（例如 `gemini-1.0-pro-001.yaml`）。
+    - 复制这个 YAML 文件，并将其重命名为能清晰标识新型号的名称（例如 `gemini-1.5-pro-latest.yaml`）。
 
-这里，我们将尝试快速运行，你也可以尝试远程调试 （一些链接）。
+3. **修改模型配置 (YAML):**
 
-我们直接打包这个模型插件:
+    - 打开你刚刚重命名的 YAML 文件 (例如 `gemini-1.5-pro-latest.yaml`)。
+    - **核心步骤：** 参考**模型供应商的官方文档**，仔细核对并修改文件中的以下关键信息：
+        - `model`: **必须**更新为新型号的官方 API 标识符。
+        - `label`: **必须**更新为在 Dify 界面中展示给用户的模型名称 (建议提供 `en_US` 和 `zh_Hans` 两种语言)。
+        - `model_properties`: 更新 `context_size` (上下文窗口大小)。
+        - `parameter_rules`: 检查并更新模型参数的限制，特别是 `max_tokens` (最大输出 Token 数) 的 `default`, `min`, `max` 值。
+        - `pricing`: 更新模型的输入 (`input`) 和输出 (`output`) 定价，以及单位 (`unit`, 通常是 `0.000001` 表示百万 Token) 和货币 (`currency`)。
+    - _(参考)_ 关于模型 YAML 文件各字段的详细规范，请查阅 [AIModelEntity Schema Definition](../../../schema-definition/model/model-designing-rules.md#aimodelentity)。
 
-```bash
-dify plugin package ./vertex_ai
-```
+    **示例 (添加 Gemini 1.5 Pro):**
 
-然后，我们直接安装这个插件，通过本地文件上传的方式。
+    | 参数              | 可能的旧模型 (示例)  | 新 Gemini 1.5 Pro (示例) | 说明                                |
+    | :---------------- | :------------------- | :----------------------- | :---------------------------------- |
+    | `model`           | `gemini-1.0-pro-001` | `gemini-1.5-pro-latest`  | **必须**修改为官方模型 ID           |
+    | `label: en_US`    | Gemini 1.0 Pro       | Gemini 1.5 Pro           | **必须**修改为用户可见标签          |
+    | `context_size`    | 30720                | 1048576                  | **必须**根据官方文档修改            |
+    | `max_tokens` (下) | 2048                 | 8192                     | **必须**根据官方文档修改默认/最大值 |
 
-测试通过后，提交 pr 到 Dify 的 GitHub 仓库。
+4. **更新供应商 Manifest 版本:**
 
-🎉恭喜，你成功添加了一个新的模型。
+    - 回到该模型供应商的根目录 (例如 `models/vertex_ai/`)。
+    - 找到并打开 `manifest.yaml` 文件。
+    - 将其中的 `version` 字段递增一个小版本号 (例如 `version: 0.0.8` -> `version: 0.0.9`)。这告诉 Dify 这是一个更新。
+
+5. **打包与本地测试:**
+
+    - 打开你的终端 (命令行工具)。
+    - **确保你的当前目录是 `dify-official-plugins` 仓库的根目录** (即包含 `models`, `tools` 等文件夹的那个目录)。
+    - 运行打包命令：
+
+    ```bash
+    # 将 <provider_name> 替换为实际的供应商目录名，例如 cohere 或 vertex_ai
+    dify plugin package models/<provider_name>
+    ```
+
+    - _成功后，你会看到类似 `plugin packaged successfully, output path: <provider_name>.difypkg` 的提示，并在当前项目根目录下生成一个名为 `<provider_name>.difypkg` 的插件包文件。_
+    - 登录你的 Dify 实例 (本地部署或云版本均可)。
+    - 点击 Dify 页面最顶部导航栏右侧的 **"插件"** 菜单项。
+    - 在插件页面，点击 **"安装插件"** 按钮。
+    - 选择 **"本地插件"** 选项卡。
+    - 点击上传区域，选择或拖拽你刚刚在本地生成的 `<provider_name>.difypkg` 文件进行上传。
+    - 等待插件安装或更新完成。
+    - 安装成功后，通常需要前往 "设置" -> "模型供应商" 找到对应的供应商，并配置你的 API 凭证（如果你之前没有配置过的话）。
+    - 创建一个新的 Dify 应用或编辑现有应用，在 "提示词编排" -> "模型" 设置中，尝试选择你新添加的模型。进行一些简单的对话或调用测试，确保它能正常工作并返回预期结果。
+
+6. **提交你的贡献:**
+    - 本地测试无误后，将你的修改（新的模型 YAML 文件和更新后的 `manifest.yaml`）通过 Git 提交 (commit) 并推送 (push) 到你 Fork 的 GitHub 仓库。
+    - 在 GitHub 上，向 `langgenius/dify-official-plugins` 主仓库发起一个 Pull Request (PR)。在 PR 描述中，可以简要说明你添加了哪个模型，并附上该模型官方文档的链接，方便审核者确认参数。
+
+---
+
+**然后呢？**
+
+一旦你的 PR 被审核通过并合并，你的贡献就会成为 Dify 官方插件的一部分，所有 Dify 用户都能方便地使用这个新模型了！
+
+这种快速接入方法是让 Dify 支持新模型的最快途径。当然，如果未来这个模型需要支持更复杂的功能（例如图片输入、函数调用等），那么可能就需要有经验的开发者对插件进行代码层面的更新了。但你现在完成的这一步，已经是非常有价值的贡献！
+
+**探索更多:**
+
+- [模型 Schema 定义](../../../schema-definition/model/) (了解模型 YAML 文件的详细规则)
+- [插件 Manifest 结构](../../../schema-definition/manifest.md) (了解 `manifest.yaml` 的作用)
+- [Dify 官方插件仓库](https://github.com/langgenius/dify-official-plugins) (查看其他插件的例子)

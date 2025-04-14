@@ -4,7 +4,7 @@ dimensions:
     primary: operational
     detail: setup
   level: intermediate
-standard_title: Plugin Developer Guidelines
+standard_title: Contributor Covenant Code of Conduct
 language: zh
 ---
 

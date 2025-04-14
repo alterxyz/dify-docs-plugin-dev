@@ -21,6 +21,15 @@ language: zh
 
 #### 不同平台安装方法
 
+**macOS [Brew](https://github.com/langgenius/homebrew-dify)（全局安装）：**
+
+```bash
+brew tap langgenius/dify
+brew install dify
+```
+
+安装完成后，新建任意终端窗口，输出 `dify version` 命令，若输出版本号信息，则说明安装成功。
+
 **macOS ARM (M 系列芯片):**
 
 ```bash

@@ -4,16 +4,11 @@ dimensions:
     primary: reference
     detail: core
   level: beginner
-target_dimensions:
-  type:
-    primary: conceptual
-    detail: architecture
-  level: beginner
 standard_title: General Specifications
 language: zh
 ---
 
-# 通用规范定义
+# (🚧)通用规范定义
 
 本文将简要介绍插件开发中常见的结构。
 

@@ -4,7 +4,7 @@ dimensions:
     primary: operational
     detail: deployment
   level: beginner
-standard_title: Readme
+standard_title: Release Overview
 language: zh
 ---
 

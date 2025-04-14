@@ -29,6 +29,7 @@ language: zh
 
 1. **下载:** 访问 [Dify Plugin CLI Releases](https://github.com/langgenius/dify-plugin-daemon/releases) 页面。根据您的操作系统（Windows, macOS Intel/ARM, Linux）下载对应的最新版本二进制文件。
 2. **设置执行权限 (macOS / Linux):**
+
     - **以下步骤以 macOS (Apple Silicon / M 系列芯片) 为例**，假设下载的文件名为 `dify-plugin-darwin-arm64`。在终端中，进入文件所在目录，并执行以下命令赋予其执行权限：
 
         ```bash
@@ -37,7 +38,9 @@ language: zh
 
     - 对于 Linux 用户，请下载对应的 Linux 版本文件并执行类似 `chmod +x <downloaded_filename>` 的命令。
     - 对于 Windows 用户，下载 `.exe` 文件后通常可直接运行。
+
 3. **验证安装:**
+
     - 在终端中，执行以下命令检查工具是否能正常运行（请将 `./dify-plugin-darwin-arm64` 替换为您下载的实际文件名或路径）：
 
         ```bash
@@ -104,6 +107,7 @@ language: zh
     ```
 
 3. **激活虚拟环境:**
+
     - **macOS / Linux:**
 
         ```bash
@@ -457,6 +461,7 @@ print(ph_link)
 1. **图标 (Icon):**
     - 在 `telegraph/_assets` 目录下放置一个代表您插件的图标文件（例如 `icon.png`, `icon.svg`）。推荐使用正方形、清晰的图片。
 2. **Provider 信息 (`provider/telegraph.yaml`):**
+
     - 确保 `identity` 部分的 `label` (显示名称), `description` (功能描述), 和 `icon` (填写图标文件名，如 `icon.png`) 已填写并支持多语言。这部分信息主要在 Dify 应用编排界面中展示给_使用_插件的用户。
 
     ```yaml
@@ -473,6 +478,7 @@ print(ph_link)
     ```
 
 3. **插件清单 (`manifest.yaml`):**
+
     - 编辑项目根目录下的 `telegraph/manifest.yaml` 文件。这是整个插件的“身份证”，其信息将展示在 Dify 的**插件管理页面**和**插件市场 (Marketplace)** 中。
     - 务必更新或确认以下字段：
         - `label`: 插件的**主要显示名称** (支持多语言)。
@@ -513,6 +519,7 @@ print(ph_link)
     ```
 
     (请将 `./telegraph` 替换为您插件项目的实际路径)
+
 3. **获取打包文件:** 命令执行成功后，将在当前目录下生成一个名为 `telegraph.difypkg` (或 `您的插件名.difypkg`) 的文件。
 
 这个 `.difypkg` 文件就是一个完整的插件包。您可以：

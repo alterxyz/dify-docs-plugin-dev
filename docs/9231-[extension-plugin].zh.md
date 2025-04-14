@@ -2,7 +2,7 @@
 dimensions:
   type:
     primary: implementation
-    detail: standard
+    detail: high
   level: beginner
 standard_title: Extension Plugin
 language: zh
