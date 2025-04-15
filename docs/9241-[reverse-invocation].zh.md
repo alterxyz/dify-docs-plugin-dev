@@ -4,7 +4,7 @@ dimensions:
     primary: implementation
     detail: advanced
   level: beginner
-standard_title: Readme
+standard_title: Reverse Invocation
 language: zh
 ---
 

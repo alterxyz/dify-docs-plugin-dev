@@ -4,7 +4,7 @@ dimensions:
     primary: implementation
     detail: advanced
   level: intermediate
-standard_title: App
+standard_title: Reverse Invocation App
 language: zh
 ---
 

@@ -4,7 +4,7 @@ dimensions:
     primary: implementation
     detail: advanced
   level: advanced
-standard_title: Node
+standard_title: Reverse Invocation Node
 language: zh
 ---
 

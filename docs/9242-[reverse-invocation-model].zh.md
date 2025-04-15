@@ -4,7 +4,7 @@ dimensions:
     primary: implementation
     detail: advanced
   level: intermediate
-standard_title: Model
+standard_title: Reverse Invocation Model
 language: zh
 ---
 

@@ -4,7 +4,7 @@ dimensions:
     primary: implementation
     detail: advanced
   level: intermediate
-standard_title: Tool
+standard_title: Reverse Invocation Tool
 language: zh
 ---
 
