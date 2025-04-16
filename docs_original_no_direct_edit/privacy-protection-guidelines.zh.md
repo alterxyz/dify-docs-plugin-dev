@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Privacy Protection Guidelines
 language: zh
+title: 插件隐私政策准则
+summary: 本文档描述了开发者向Dify Marketplace提交插件时如何撰写隐私政策的准则。内容包括如何确认和列出所收集的个人数据类型（直接识别信息、间接识别信息、组合信息）、如何填写插件隐私政策、如何在Manifest文件中引入隐私政策声明，以及相关常见问题的解答。
 ---
 
 # 插件隐私政策准则

@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Getting Started Dify Tool
 language: zh
+title: Dify 插件开发：Hello World 指南
+summary: 本文档提供了从零开始Dify插件开发的详细教程，以创建Telegraph发布插件为例，涉及环境准备、项目初始化、虚拟环境配置、插件核心逻辑开发、本地运行调试、插件元信息完善以及打包发布等环节。
 ---
-
-# Dify 插件开发：Hello World 指南
 
 欢迎阅读 Dify 插件开发的入门指南！本教程假设您具备基本的编程背景知识，并有使用 Dify 平台的经验。完成本教程后，您将掌握创建简单 Dify 插件的基础流程，从 Dify 用户迈向插件贡献者。
 

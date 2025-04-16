@@ -6,6 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Develop A Slack Bot Plugin
 language: zh
+title: 开发 Slack Bot 插件
+summary: 本文档提供了完整的Slack Bot插件开发指南，包括遍历项目初始化、编辑配置表单、实现功能代码、插件调试、设置Endpoint、效果验证到打包发布的完整流程。需要使用Dify插件脚手架工具和已创建的Slack
+  App以实现在Slack平台上搞建由AI驱动的聊天机器人。
 ---
 
 # 开发 Slack Bot 插件
@@ -44,7 +47,7 @@ Slack 是一个自由开放的实时办公通信平台，拥有丰富的 API。�
 
     Slack Bot 获取 Dify 应用的回复后，通过插件将消息原路返回至 Slack Bot，使得用户能够在使用 Slack 时直接与 Dify 应用互动
 
-### 前置准备 <a href="#qian-zhi-zhun-bei" id="qian-zhi-zhun-bei"></a>
+### 前置准备
 
 * Dify 插件脚手架工具，详细说明请参考[初始化开发工具](../initialize-development-tools.md)。
 * Python 环境，版本号 ≥ 3.12，详细说明请参考 [Python 安装教程](https://pythontest.com/python/installing-python-3-11/)，或询问 LLM 获取完整的安装教程。

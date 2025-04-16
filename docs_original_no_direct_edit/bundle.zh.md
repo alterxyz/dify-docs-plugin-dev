@@ -6,6 +6,8 @@ dimensions:
   level: beginner
 standard_title: Bundle
 language: zh
+title: Bundle 插件包
+summary: 本文档介绍了Bundle插件包的概念和开发方法。Bundle插件包可以将多个插件集合到一起，支持三种类型（Marketplace类型、GitHub类型和Package类型）。文档详细说明了创建Bundle项目、添加不同类型依赖以及打包Bundle项目的全过程。
 ---
 
 # Bundle 插件包

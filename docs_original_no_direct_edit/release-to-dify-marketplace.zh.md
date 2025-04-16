@@ -6,9 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Release to Dify Marketplace
 language: zh
+title: 发布至 Dify Marketplace
+summary: 本指引详细介绍了如何将插件发布到Dify Marketplace的完整流程，包括提交PR、审核流程、发布后维护等关键步骤和注意事项。
 ---
-
-# 发布至 Dify Marketplace
 
 Dify Marketplace 欢迎来自合作伙伴和社区开发者的插件上架申请，您的贡献将进一步丰富 Dify 插件的可能性。本指引将提供清晰的发布流程和最佳实践建议，让您的插件能够顺利发布，并为社区带来价值。
 
@@ -18,8 +18,8 @@ Dify Marketplace 欢迎来自合作伙伴和社区开发者的插件上架申请
 
 将插件发布至 Dify Marketplace 包含以下步骤：
 
-1. 根据[插件开发者准则](plugin-developer-guidelines.md)完成插件的开发和测试；
-2. 根据[插件隐私政策准则](plugin-privacy-protection-guidelines.md)撰写该插件隐私政策，并将该隐私政策的文件路径或 URL 写入插件 [Manifest 文件](../../schema-definition/manifest.md)；
+1. 根据[插件开发者准则](0312-[contributor-covenant-code-of-conduct].zh.md)完成插件的开发和测试；
+2. 根据[插件隐私政策准则](0312-[privacy-protection-guidelines].zh.md)撰写该插件隐私政策，并将该隐私政策的文件路径或 URL 写入插件 [Manifest 文件](0411-[plugin-info-by-manifest].zh.md)；
 3. 完成插件打包；
 4. Fork [Dify Plugins](https://github.com/langgenius/dify-plugins) 代码仓库；
 5. 创建 Organization 目录，在 Organization 目录下创建插件名目录，将插件的代码和 pkg 文件上传至对应的插件名目录下；
@@ -30,11 +30,7 @@ Dify Marketplace 欢迎来自合作伙伴和社区开发者的插件上架申请
 
 ![The process of uploading plugins](https://assets-docs.dify.ai/2025/01/05df333acfaf662e99316432db23ba9f.png)
 
-{% hint style="info" %}
-**Note**:
-
-上图中的 Contributor Agreement 指的是[插件开发者准则](plugin-developer-guidelines.md)。
-{% endhint %}
+> **Note**: 上图中的 Contributor Agreement 指的是[插件开发者准则](0312-[contributor-covenant-code-of-conduct].zh.md)。
 
 ***
 

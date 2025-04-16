@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Reverse Invocation
 language: zh
+title: 反向调用 Dify 服务
+summary: 本文档简要介绍了Dify插件的反向调用能力，即插件可以调用Dify主平台内的指定服务。文档列出了四类可被调用的模块：App（访问App数据）、Model（调用平台内的模型能力）、Tool（调用平台内的其他工具插件）和Node（调用Chatflow/Workflow应用内的节点）。
 ---
-
-# 反向调用 Dify 服务
 
 插件可以自由调用 Dify 主平台内的部分服务，用以提升插件的能力。
 

@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: General Specifications
 language: zh
+title: (🚧)通用规范定义
+summary: 本文档详细介绍了Dify插件开发中的通用结构和规范，包括路径规范、国际化对象(I18nObject)、供应商表单结构(ProviderConfig)、模型配置(ModelConfig)、节点响应(NodeResponse)和工具选择器(ToolSelector)等重要数据结构的定义和用途。
 ---
-
-# (🚧)通用规范定义
 
 本文将简要介绍插件开发中常见的结构。
 

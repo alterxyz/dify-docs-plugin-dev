@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Agent
 language: zh
+title: Agent
+summary: 本文档详细介绍了Dify的Agent策略插件开发流程，包括在Manifest文件中添加Agent策略字段、定义Agent供应商以及实现Agent策略的核心步骤。文档详细介绍了如何获取参数、调用模型、调用工具以及生成和管理日志的完整示例代码。
 ---
 
 # Agent

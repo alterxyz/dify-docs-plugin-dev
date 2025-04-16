@@ -6,6 +6,8 @@ dimensions:
   level: advanced
 standard_title: Tool
 language: zh
+title: Tool
+summary: 本文档详细介绍了Dify插件中Tool的数据结构和使用方法。内容包括如何返回不同类型的消息（图片URL、链接、文本、文件、JSON）、如何创建变量和流式变量消息以及如何定义工具的输出变量模式以便于在workflow中引用。
 ---
 
 # Tool

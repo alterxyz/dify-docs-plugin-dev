@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Getting Started Dify Model
 language: zh
+title: 欢迎开始 Dify 插件开发
+summary: 介绍Dify插件的概念、功能和开发价值，包括插件类型（模型、工具、Agent策略、扩展、包）的简要说明，以及开发者文档的内容概览。
 ---
-
-# 欢迎开始 Dify 插件开发
 
 你好！我们非常高兴你对构建 Dify 插件感兴趣。本开发者文档中心是你的核心资源库，旨在帮助你学习、创建、调试、发布和管理 Dify 插件。
 

@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Contributor Covenant Code of Conduct
 language: zh
+title: 插件开发者准则
+summary: 本文档提供了Dify插件开发者在提交Pull Request前需要遵循的准则，包括確保插件功能正常、文档完整、提供独特价值，以及符合数据隐私和安全规范。包含了说明文档要求、应避免重复插件的指南以及隐私信息收集声明要求。
 ---
 
 # 插件开发者准则

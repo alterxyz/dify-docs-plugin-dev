@@ -6,9 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Agent
 language: zh
+title: Agent
+summary: 本文档详细介绍了Dify的Agent策略插件开发流程，包括在Manifest文件中添加Agent策略字段、定义Agent供应商以及实现Agent策略的核心步骤。文档详细介绍了如何获取参数、调用模型、调用工具以及生成和管理日志的完整示例代码。
 ---
-
-# Agent
 
 Agent 策略是一个定义了标准输入内容与输出格式的可扩展模板。通过开发具体 Agent 策略接口的功能代码，你可以实现众多不同的 Agent 策略如 CoT（思维链）/ ToT（思维树）/ GoT（思维图）/ BoT（思维骨架），实现一些诸如 [Sementic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/)  的复杂策略。
 

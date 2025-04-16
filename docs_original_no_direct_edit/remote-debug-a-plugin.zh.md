@@ -6,6 +6,8 @@ dimensions:
   level: beginner
 standard_title: Remote Debug a Plugin
 language: zh
+title: 插件调试
+summary: 本文档介绍了如何使用Dify的远程调试功能来测试插件。详细说明了获取调试信息、配置环境变量文件、启动插件远程调试以及验证插件安装状态的完整流程。通过这种方式，开发者可以在本地开发的同时在Dify环境中实时测试插件。
 ---
 
 # 插件调试

@@ -7,9 +7,9 @@ dimensions:
 description: 'Author: Yeuoly，Allen'
 standard_title: Endpoint
 language: zh
+title: Endpoint
+summary: 本文档详细介绍了Dify插件中Endpoint的结构和实现方式，以彩虹猫项目为例。内容包括如何定义Endpoint组、配置接口、实现_invoke方法以及处理请求和响应。文档详细解释了各种YAML配置字段的含义和使用方法。
 ---
-
-# Endpoint
 
 本文将以[彩虹猫](../quick-start/develop-plugins/extension-plugin.md)项目为例，说明插件内的 Endpoint 的结构。完整的插件代码请参考 [Github 仓库](https://github.com/langgenius/dify-plugin-sdks/tree/main/python/examples/neko)。
 

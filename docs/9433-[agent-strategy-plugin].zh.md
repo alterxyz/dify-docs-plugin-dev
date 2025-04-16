@@ -6,9 +6,9 @@ dimensions:
   level: advanced
 standard_title: Agent Strategy Plugin
 language: zh
+title: Agent 策略插件
+summary: 本文档详细介绍了如何开发Agent策略插件，从初始化插件模板到调用模型、调用工具、输出日志和打包发布的整个过程。文档提供了详尽的代码示例，包括如何实现帮助LLM执行推理或决策逻辑的自动化工具调用功能。
 ---
-
-# Agent 策略插件
 
 Agent 策略插件能够帮助 LLM 执行推理或决策逻辑，包括工具选择、调用和结果处理，以更加自动化的方式处理问题。
 
@@ -21,9 +21,7 @@ Agent 策略插件能够帮助 LLM 执行推理或决策逻辑，包括工具选
 
 关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](initialize-development-tools.md)。
 
-{% hint style="info" %}
 **Tips**：在终端运行 `dify version` 命令，检查是否出现版本号以确认成功安装脚手架工具。
-{% endhint %}
 
 ### 1. 初始化插件模板
 
@@ -335,8 +333,7 @@ yield model_log
 
 #### 插件功能示例代码
 
-{% tabs %}
-{% tab title="调用模型" %}
+
 #### 调用模型
 
 以下代码将演示如何赋予 Agent 策略插件调用模型的能力：
@@ -561,9 +558,8 @@ class BasicAgentAgentStrategy(AgentStrategy):
 
         return tool_calls
 ```
-{% endtab %}
 
-{% tab title="调用工具" %}
+
 #### 调用工具
 
 以下代码展示了如何为 Agent 策略插件实现模型调用并向工具发送规范化请求。
@@ -788,9 +784,8 @@ class BasicAgentAgentStrategy(AgentStrategy):
 
         return tool_calls
 ```
-{% endtab %}
 
-{% tab title="完整功能代码示例" %}
+
 #### 完整功能代码示例
 
 包含**调用模型、调用工具**以及**输出多轮日志功能**的完整插件代码示例：
@@ -1046,8 +1041,8 @@ class BasicAgentAgentStrategy(AgentStrategy):
 
         return tool_calls
 ```
-{% endtab %}
-{% endtabs %}
+
+
 
 ### 3. 调试插件
 

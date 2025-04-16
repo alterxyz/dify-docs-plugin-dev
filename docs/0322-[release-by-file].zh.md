@@ -6,9 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Release by File
 language: zh
+title: 打包为本地文件与分享
+summary: 本文档介绍了如何将Dify插件项目打包为本地文件并分享给他人的详细步骤。内容包括插件打包前的准备工作、使用Dify插件开发工具执行打包命令、生成的.difypkg文件的安装方式以及如何分享插件文件给其他用户。
 ---
-
-# 打包为本地文件与分享
 
 完成插件开发后，你可以将插件项目打包为一个本地文件并分享给他人，通过插件文件后即可安装至 Dify Workspace 内。
 

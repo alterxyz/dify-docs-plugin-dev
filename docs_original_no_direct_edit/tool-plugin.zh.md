@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Tool Plugin
 language: zh
+title: Tool 插件
+summary: 本文档详细介绍了如何开发Dify的工具插件，以Google Search为例实现了一个完整的工具插件开发流程。内容包括插件初始化、模板选择、模板选择、工具供应商配置文件定义、添加第三方服务凭证、工具功能代码实现、调试和打包发布等完整环节。
 ---
 
 # Tool 插件
@@ -350,9 +352,7 @@ dify plugin package ./google
 
 如果想要将插件发布至 Dify Marketplace，请确保你的插件遵循了[插件发布规范](https://docs.dify.ai/zh-hans/plugins/publish-plugins/publish-to-dify-marketplace)。审核通过后，代码将合并至主分支并自动上线至 [Dify Marketplace](https://marketplace.dify.ai/)。
 
-{% content-ref url="../../publish-plugins/" %}
-[publish-plugins](../../publish-plugins/)
-{% endcontent-ref %}
+[发布插件指南](../../publish-plugins/)
 
 ### 探索更多
 

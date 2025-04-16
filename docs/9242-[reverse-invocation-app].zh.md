@@ -6,9 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Reverse Invocation App
 language: zh
+title: App
+summary: 本文档详细介绍了插件如何反向调用Dify平台中的App服务。内容包括三种不同类型的接口：聊天接口（适用于Chatbot/Agent/Chatflow类型应用）、Workflow接口和Completion接口，并提供了每种接口的入口方式、调用规范以及实际的调用示例代码。
 ---
-
-# App
 
 反向调用 App 指的是插件能够访问 Dify 中的 App 数据。该模块同时支持流式与非流式的 App 调用。
 

@@ -6,6 +6,8 @@ dimensions:
   level: beginner
 standard_title: Release Overview
 language: zh
+title: 发布插件
+summary: 本文档介绍了Dify插件的三种发布方式：官方Marketplace、开源GitHub仓库和本地插件文件包。详细说明了每种发布方式的特点、发布流程以及适用场景，并提供了具体的发布建议以满足不同开发者的需求。
 ---
 
 # 发布插件
@@ -30,9 +32,7 @@ language: zh
 
 详细说明请参考：
 
-{% content-ref url="publish-to-dify-marketplace/" %}
 [publish-to-dify-marketplace](publish-to-dify-marketplace/)
-{% endcontent-ref %}
 
 #### 2. **GitHub 仓库**
 
@@ -50,9 +50,7 @@ language: zh
 
 详细说明请参考：
 
-{% content-ref url="publish-plugin-on-personal-github-repo.md" %}
 [publish-plugin-on-personal-github-repo.md](publish-plugin-on-personal-github-repo.md)
-{% endcontent-ref %}
 
 #### 3. 插件文件包（本地安装）
 
@@ -72,9 +70,7 @@ language: zh
 
 详细说明请参考：
 
-{% content-ref url="package-plugin-file-and-publish.md" %}
 [package-plugin-file-and-publish.md](package-plugin-file-and-publish.md)
-{% endcontent-ref %}
 
 ### **发布建议**
 

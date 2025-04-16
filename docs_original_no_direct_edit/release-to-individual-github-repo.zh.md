@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Release to Individual GitHub Repo
 language: zh
+title: 发布至个人 GitHub 仓库
+summary: 本文档详细介绍了如何将Dify插件发布到个人的GitHub仓库中，包括准备工作、初始化本地插件仓库、连接远程仓库、上传插件文件、打包插件代码以及如何通过GitHub安装插件的完整流程。该方式允许开发者完全管理自己的插件代码和更新。
 ---
 
 # 发布至个人 GitHub 仓库
@@ -85,7 +87,7 @@ git push origin v0.0.1
 
 ### 5. 打包插件代码
 
-前往 GitHub 代码仓库的 Releases 页，创建一个新的版本发布。发布版本时需上传插件文件。关于如何打包插件文件，详细说明请阅读[打包插件](broken-reference)。
+前往 GitHub 代码仓库的 Releases 页，创建一个新的版本发布。发布版本时需上传插件文件。关于如何打包插件文件，详细说明请阅读[打包为本地文件与分享](0322-[release-by-file].zh.md)。
 
 ![打包插件](https://assets-docs.dify.ai/2024/12/5cb4696348cc6903e380287fce8f529d.png)
 

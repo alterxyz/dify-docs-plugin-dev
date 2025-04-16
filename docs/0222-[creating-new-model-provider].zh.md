@@ -6,20 +6,20 @@ dimensions:
   level: intermediate
 standard_title: Creating New Model Provider
 language: zh
+title: 创建模型供应商
+summary: 本文档详细指导如何创建模型供应商插件，包括项目初始化、模型配置方式（预定义模型和自定义模型）的选择、创建供应商配置YAML文件以及编写供应商代码的完整流程。
 ---
-
-# 创建模型供应商
 
 创建 Model 类型插件的第一步是初始化插件项目并创建模型供应商文件，随后编写具体的预定义 / 自定义模型代码。
 
-### 前置准备 <a href="#qian-zhi-zhun-bei" id="qian-zhi-zhun-bei"></a>
+### 前置准备
 
 * Dify 插件脚手架工具
 * Python 环境，版本号 ≥ 3.12
 
 关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](../initialize-development-tools.md)。
 
-### 创建新项目 <a href="#chuang-jian-xin-xiang-mu" id="chuang-jian-xin-xiang-mu"></a>
+### 创建新项目
 
 在脚手架命令行工具的路径下，创建一个新的 dify 插件项目。
 
@@ -33,7 +33,7 @@ language: zh
 dify plugin init
 ```
 
-### 选择模型插件模板 <a href="#xuan-ze-cha-jian-lei-xing-he-mu-ban" id="xuan-ze-cha-jian-lei-xing-he-mu-ban"></a>
+### 选择模型插件模板
 
 脚手架工具内的所有模板均已提供完整的代码项目，选择 `LLM` 类型插件模板。
 
@@ -250,5 +250,5 @@ class XinferenceProvider(Provider):
 
 初始化模型供应商后，接下来需要接入供应商所提供的具体 llm 模型。详细说明请参考以下内容：
 
-* [接入预定义模型](../../../../guides/model-configuration/predefined-model.md)
-* [接入自定义模型](../../../../guides/model-configuration/customizable-model.md)
+* [接入预定义模型](../../schema-definition/model/model-designing-rules.md)
+* [接入自定义模型](../../schema-definition/model/model-schema.md)

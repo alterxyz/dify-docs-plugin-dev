@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Model Plugin Introduction
 language: zh
+title: Model 插件
+summary: 介绍模型插件的基本概念和结构。模型插件让Dify能够调用不同供应商（如OpenAI、Anthropic、Google等）的各类模型，包括大语言模型（LLM）、文本嵌入、语音转文字等不同类型。
 ---
-
-# Model 插件
 
 Model 模型插件使 Dify 平台能够调用该模型供应商下的所有 LLM。例如，安装 OpenAI 模型插件后，Dify 平台即可调用 OpenAI 提供的 `GPT-4`、`GPT-4o-2024-05-13` 等模型。
 

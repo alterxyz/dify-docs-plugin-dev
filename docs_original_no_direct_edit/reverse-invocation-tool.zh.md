@@ -6,6 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Reverse Invocation Tool
 language: zh
+title: Tool
+summary: 本文档详细介绍了插件如何反向调用Dify平台中的工具服务。内容涉及三种不同类型的工具调用方法：调用已安装的工具（Built-in Tool）、调用Workflow
+  as Tool以及调用自定义工具（Custom Tool）。每种调用方式都配有对应的入口和接口参数说明。
 ---
 
 # Tool

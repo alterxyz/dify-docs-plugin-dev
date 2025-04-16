@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Getting Started New Model
 language: zh
+title: 快速接入一个新模型
+summary: 本文档指导非专业开发者如何为Dify添加新模型，重点在于通过修改配置文件为现有模型供应商添加新型号模型。包括Fork仓库、复制与修改模型配置、更新供应商版本、本地测试以及提交贡献的完整流程。
 ---
-
-# 快速接入一个新模型
 
 欢迎来到 Dify 的插件开发世界！Dify 的强大功能离不开社区贡献者的共同努力。我们相信，即使你不是专业的程序员，只要你对 AI 技术充满热情并愿意查阅资料，也能为 Dify 贡献自己的一份力量，例如帮助 Dify 支持更多、更新的 AI 模型。
 

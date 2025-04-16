@@ -8,6 +8,8 @@ description: 'Author: Allen'
 todo: 开发者(Developer / Contributor)应该充分测试后才上架, debug 不该是用户(Dify User / Consumer) 该做的事.
 standard_title: Faq
 language: zh
+title: 常见问题
+summary: 本文档回答了Dify插件开发和安装过程中的常见问题，包括插件上传失败的解决方法（修改author字段）以及如何处理插件安装过程中的验证异常（设置FORCE_VERIFYING_SIGNATURE环境变量）。
 ---
 
 # 常见问题

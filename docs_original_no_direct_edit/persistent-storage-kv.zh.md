@@ -6,6 +6,8 @@ dimensions:
   level: beginner
 standard_title: Persistent Storage KV
 language: zh
+title: 持久化存储
+summary: 本文档介绍了Dify插件中的持久化存储功能，详细说明了如何在插件中使用KV数据库来储存、获取和删除数据。这一功能使插件能够在相同Workspace内持久化存储数据，满足跨会话数据保存的需求。
 ---
 
 # 持久化存储

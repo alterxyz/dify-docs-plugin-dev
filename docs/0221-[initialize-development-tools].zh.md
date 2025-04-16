@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Initialize Development Tools
 language: zh
+title: 初始化开发工具
+summary: 本文档详细介绍了Dify插件开发前的必要准备工作，包括安装Dify插件脚手架工具（dify-plugin-daemon）和配置Python环境（版本要求≥3.12）的完整步骤。文档还提供了各类型插件开发的参考链接。
 ---
-
-# 初始化开发工具
 
 开发 Dify 插件需要进行以下准备。
 

@@ -7,6 +7,8 @@ dimensions:
 description: 'Author: Yeuoly，Allen'
 standard_title: Plugin info by Manifest
 language: zh
+title: Manifest
+summary: 本文档详细介绍了Dify插件中的Manifest文件，它是定义插件基本信息的YAML文件。文档包含完整的代码示例和详细的结构说明，涵盖插件版本、类型、作者、名称、资源使用、权限申请、功能定义、运行时等各方面的配置信息。
 ---
 
 # Manifest

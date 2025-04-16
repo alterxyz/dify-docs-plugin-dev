@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Reverse Invocation Model
 language: zh
+title: Model
+summary: 本文档详细介绍了插件如何反向调用Dify平台中的模型服务。内容包括反向调用LLM、Summary、TextEmbedding、Rerank、TTS、Speech2Text和Moderation等模型的具体方法，每种模型调用都配有对应的入口、接口参数说明以及实际的使用示例代码，并提供了调用模型的最佳实践建议。
 ---
 
 # Model

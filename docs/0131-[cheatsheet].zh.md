@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Cheatsheet
 language: zh
+title: Dify Plugin 开发速查表
+summary: 全面的Dify插件开发参考指南，包括环境要求、安装方法、开发流程、插件分类及类型、常用代码片段和常见问题解决方案。适合开发者快速查阅和参考。
 ---
-
-## Dify Plugin 开发速查表
 
 ### 环境要求
 

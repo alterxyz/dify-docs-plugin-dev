@@ -6,9 +6,9 @@ dimensions:
   level: advanced
 standard_title: Customizable Model
 language: zh
+title: 接入自定义模型
+summary: 本文档详细介绍了如何在Dify中接入自定义模型，以Xinference模型为例。文档涉及创建模型供应商文件、根据模型类型编写对应代码、实现模型调用逻辑和异常处理及调试发布等完整流程。特别详细地说明了LLM调用、Token计算、凭证校验和参数生成等核心方法的实现。
 ---
-
-# 接入自定义模型
 
 自定义模型指的是需要自行部署或配置的 LLM。本文将以 [Xinference 模型](https://inference.readthedocs.io/en/latest/)为例，演示如何在模型插件内接入自定义模型。
 
@@ -319,17 +319,13 @@ def _invoke_error_mapping(self) -> dict[type[InvokeError], list[type[Exception]]
 
 插件开发完成后，接下来需测试插件是否可以正常运行。详细说明请参考：
 
-{% content-ref url="../../debug-plugin.md" %}
 [debug-plugin.md](../../debug-plugin.md)
-{% endcontent-ref %}
 
 ### 4. 发布插件
 
 如果想要将插件发布至 Dify Marketplace，请参考以下内容：
 
-{% content-ref url="../../../publish-plugins/publish-to-dify-marketplace/" %}
 [publish-to-dify-marketplace](../../../publish-plugins/publish-to-dify-marketplace/)
-{% endcontent-ref %}
 
 ### **探索更多**
 

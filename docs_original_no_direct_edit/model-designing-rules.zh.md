@@ -6,6 +6,8 @@ dimensions:
   level: beginner
 standard_title: Model Designing Rules
 language: zh
+title: 模型设计规则
+summary: 本文档详细定义了Dify模型插件开发的核心概念和结构，包括模型供应商(Provider)、AI模型实体(AIModelEntity)、模型类型(ModelType)、配置方法(ConfigurateMethod)、模型特性(ModelFeature)、参数规则(ParameterRule)、价格配置(PriceConfig)及各种凭证模式的详细数据结构规范。
 ---
 
 # 模型设计规则

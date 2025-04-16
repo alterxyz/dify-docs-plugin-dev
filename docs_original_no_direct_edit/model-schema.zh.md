@@ -6,6 +6,8 @@ dimensions:
   level: intermediate
 standard_title: Model Schema
 language: zh
+title: 模型接口
+summary: 本文档详细介绍了Dify模型插件开发所需的接口规范，包括模型供应商实现、五种模型类型（LLM、TextEmbedding、Rerank、Speech2text、Text2speech）的接口定义以及相关数据结构如PromptMessage、LLMResult等的完整规范。文档适用于开发者实现各种模型集成的开发参考。
 ---
 
 # 模型接口

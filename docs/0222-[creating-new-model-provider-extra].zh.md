@@ -6,9 +6,9 @@ dimensions:
   level: intermediate
 standard_title: Creating New Model Provider Extra
 language: zh
+title: 实现标准的模型集成
+summary: 本文档面向需要编写Python代码以添加或增强Dify模型支持的开发者，详细指导如何创建目录结构、编写模型配置、实现模型调用逻辑、调试和发布插件的完整流程，包含了核心方法实现和错误处理的细节。
 ---
-
-# 实现标准的模型集成
 
 本文档是为需要通过编写 Python 代码来为 Dify 添加或增强模型支持的开发者准备的标准指南。当你需要添加的模型涉及新的 API 调用逻辑、特殊参数处理或 Dify 需要显式支持的新功能（如 Vision, Tool Calling）时，就需要遵循本指南的步骤。
 

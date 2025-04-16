@@ -6,9 +6,9 @@ dimensions:
   level: beginner
 standard_title: Extension Plugin
 language: zh
+title: Extension 插件
+summary: 本文档提供了开发Extension类型插件的完整教程，详细介绍了环境准备、创建项目、定义插件请求入口、编写功能代码、调试、打包发布等全过程。示例项目是一个彩虹猫插件，展示了如何通过Extension插件处理HTTP请求并提供网页服务。
 ---
-
-# Extension 插件
 
 本文将引导你快速开发一个 Extension 类型的插件，以帮助你了解插件开发的基础流程。
 
@@ -19,7 +19,7 @@ language: zh
 
 关于如何准备插件开发的脚手架工具，详细说明请参考[初始化开发工具](initialize-development-tools.md)。
 
-### 创建新项目 <a href="#chuang-jian-xin-xiang-mu" id="chuang-jian-xin-xiang-mu"></a>
+### 创建新项目
 
 在当前路径下，运行脚手架命令行工具，创建一个新的 dify 插件项目。
 

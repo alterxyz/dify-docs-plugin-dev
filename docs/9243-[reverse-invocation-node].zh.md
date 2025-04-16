@@ -6,9 +6,9 @@ dimensions:
   level: advanced
 standard_title: Reverse Invocation Node
 language: zh
+title: Node
+summary: 本文档介绍了插件如何反向调用Dify平台中的Chatflow/Workflow应用节点功能。内容主要涉及两种特殊节点的调用方法：参数提取器节点（ParameterExtractor）和问题分类节点（QuestionClassifier）。文档详细说明了这两种节点的调用入口、接口参数和用例代码。
 ---
-
-# Node
 
 反向调用 Node 指的是插件能够访问 Dify 中 Chatflow/Workflow 应用内部分节点的能力。
 
